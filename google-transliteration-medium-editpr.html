@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script type="text/javascript" src="https://www.google.com/jsapi">
+    </script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/medium-editor/latest/js/medium-editor.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/medium-editor/latest/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+
+<div class="editable" id="editable"></div>
+<script>
+var editor = new MediumEditor('.editable', {
+    placeholder: {
+        /* This example includes the default options for placeholder,
+           if nothing is passed this is what it used */
+        text: 'Muthu',
+        hideOnClick: true
+    }
+});
+function readData(){
+  console.log($( ".editable" ).html());
+}
+
+/* TO LOAD GOOGLE FONT */
+
+      // Load the Google Transliterate API
+      google.load("elements", "1", {
+            packages: "transliteration"
+          });
+
+      function onLoad() {
+        var options = {
+            sourceLanguage:
+                google.elements.transliteration.LanguageCode.ENGLISH,
+            destinationLanguage:
+                [google.elements.transliteration.LanguageCode.TAMIL],
+            shortcutKey: 'ctrl+g',
+            transliterationEnabled: true
+        };
+
+        // Create an instance on TransliterationControl with the required
+        // options.
+        var control =
+            new google.elements.transliteration.TransliterationControl(options);
+
+        // Enable transliteration in the textbox with id
+        // 'transliterateTextarea'.
+        control.makeTransliteratable(['editable']);
+      }
+      google.setOnLoadCallback(onLoad);
+</script>
+
+<button onclick="readData()">Read</button>
+</html>
